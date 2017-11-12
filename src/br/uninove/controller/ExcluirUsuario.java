@@ -1,7 +1,6 @@
 package br.uninove.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import br.uninove.dao.UsuarioDao;
 import br.uninove.entidade.Usuario;
 
-@WebServlet("/buscartodos.do")
-public class BuscarTodos extends HttpServlet {
+@WebServlet("/excluirusuario.do")
+public class ExcluirUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		Integer codigo = Integer.parseInt(request.getParameter("codigo"));
+		
+		Usuario usuario = new Usuario();
+		usuario.setCodigo(codigo);
 		
 		UsuarioDao usuarioDao = new UsuarioDao();
-		List<Usuario> listaUsuarios = usuarioDao.buscarTodos();
+		usuarioDao.excluir(usuario);
 		
-		request.setAttribute("listaUsuarios", listaUsuarios);
-		request.getRequestDispatcher("buscartodos.jsp").forward(request, response);
-		
+		response.sendRedirect("http://localhost:8080/EmpresaABC/buscartodos.do");
 	}
 
 }

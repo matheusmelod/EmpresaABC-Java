@@ -1,4 +1,5 @@
-<%@page import="br.uninove.entidade.Filme"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="br.uninove.entidade.Usuario"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,29 +11,26 @@
 </head>
 <body>
 	
-	<h1>Mostrar todos Filmes</h1>
+	<h1>Mostrar todos usuarios</h1>
 	
-	<input style="margin-bottom:20px;" type="button" name="qqnome" value="Criar" onClick="javascript:window.location='cadastro.html'"/>
 	
-	<table style="text-align:center" border=1 cellspacing="0" width="70%">
+	<table border=1 cellspacing="0" width="70%">
 		<tr bgcolor="black"  style="color:pink">
-			<th>ID</th><th>FILME</th><th>GENERO</th><th>CLASSIFICAÇÂO</th><th colspan="2">Ação</th>
+			<th>Código</th><th>Nome</th><th>Login</th><th>Senha</th><th colspan="2">Ação</th>
 		</tr>
-		
-			<%
-				List<Filme> lista = (List<Filme>)request.getAttribute("listaFilme");
-				
-				for(Filme film:lista){
-			%>
+	
+			<c:forEach items="${listaUsuarios}"  var="usu" >
 	
 		<tr>
-			<td><%=film.getId() %></td><td><%=film.getFilme() %></td><td><%=film.getGenero() %></td><td><%=film.getClassificacao() %></td><td><a href="excluirfilme.do?codigo=<%=film.getId() %>">Excluir</a></td><td><a href="obterdados.do?id=<%=film.getId() %>">Alterar</a></td>
+			<td>${usu['codigo']}</td>
+			<td>${usu['nome']}</td>
+			<td>${usu['login']}</td>
+			<td>${usu['senha']}</td>
+			
+			<td><a href="excluirusuario.do?codigo=${usu['codigo']}">Excluir</a></td>
+			<td><a href="obterdados.do?codigo=${usu['codigo']}">Alterar</a></td>
 		</tr>
-		
-		<%
-				}
-		%>
-		
+		</c:forEach>
 	</table>
 </body>
 </html>

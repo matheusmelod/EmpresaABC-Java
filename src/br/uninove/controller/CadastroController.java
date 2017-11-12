@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.uninove.dao.FilmeDao;
-import br.uninove.entidade.Filme;
+import br.uninove.dao.UsuarioDao;
+import br.uninove.entidade.Usuario;
 
 
 @WebServlet("/cadastro.do")
@@ -20,19 +20,19 @@ public class CadastroController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String filme = request.getParameter("txtfilme"); 
-		String genero = request.getParameter("txtgenero");
-		String classificacao = request.getParameter("txtclassificacao");
+		String nome = request.getParameter("txtnome"); 
+		String login = request.getParameter("txtlogin");
+		String senha = request.getParameter("txtsenha");
 		
-		Filme film = new Filme();
-		film.setFilme(filme);
-		film.setGenero(genero);
-		film.setClassificacao(classificacao);
+		Usuario usuario = new Usuario();
+		usuario.setNome(nome);
+		usuario.setLogin(login);
+		usuario.setSenha(senha);
 		
-		FilmeDao filmeDao = new FilmeDao();
-		filmeDao.cadastrar(film);
+		UsuarioDao usuarioDao = new UsuarioDao();
+		usuarioDao.cadastrar(usuario);
 		
-		response.sendRedirect("http://localhost:8080/EmpresaABC/buscartodos.do");
+		response.sendRedirect("http://localhost:80809/EmpresaABC/cadastro.html");
 		
 		
 	}

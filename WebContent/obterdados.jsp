@@ -1,4 +1,4 @@
-<%@page import="br.uninove.entidade.Filme"%>
+<%@page import="br.uninove.entidade.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,18 +9,15 @@
 </head>
 <body>
 
-<%
-	Filme film = (Filme)request.getAttribute("filme");
-%>
-<h1>Editar de Filme</h1> 
 	<form method="post" action="obterdados.do">
 	
-		Id: <input style="margin-left: 75px;" type="text" name="txtid" value="<%=film.getId() %>" readonly><br><br>
-		Filme: <input style="margin-left: 50px;" type="text" name="txtfilme" size="50" value="<%=film.getFilme() %>"><br><br>
-		Genero: <input style="margin-left: 40px;" type="text" name="txtgenero" size="50" value="<%=film.getGenero() %>"><br><br>
-		Classificação: <input type="text" name="txtclassificacao" size="50" value="<%=film.getClassificacao() %>"><br><br><br><br>
+		Código: <input type="text" name="txtcodigo" value="${usuario.codigo}" readonly><br><br>
+		Nome: <input type="text" name="txtnome" value="${usuario.nome}"><br><br>
+		Login: <input type="text" name="txtlogin" value="${usuario.login}"><br><br>
+		Senha: <input type="text" name="txtsenha" value="${usuario.senha}"><br><br>
 		
-		<input type="submit" value="Editar Filme">
+		<input type="submit" value="Alterar Cadastro">
+		
 	</form>
 
 </body>

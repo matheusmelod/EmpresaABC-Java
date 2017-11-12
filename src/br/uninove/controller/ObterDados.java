@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.uninove.dao.FilmeDao;
-import br.uninove.entidade.Filme;
+import br.uninove.dao.UsuarioDao;
+import br.uninove.entidade.Usuario;
 
 @WebServlet("/obterdados.do")
 public class ObterDados extends HttpServlet {
@@ -17,13 +17,13 @@ public class ObterDados extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Integer id = Integer.parseInt(request.getParameter("id"));
+		Integer codigo = Integer.parseInt(request.getParameter("codigo"));
 		
-		FilmeDao usuarioDao = new FilmeDao();
-		Filme filme = usuarioDao.buscarPorCodigo(id);
-		filme.setId(id);
+		UsuarioDao usuarioDao = new UsuarioDao();
+		Usuario usuario = usuarioDao.buscarPorCodigo(codigo);
+		usuario.setCodigo(codigo);
 		
-		request.setAttribute("filme", filme);
+		request.setAttribute("usuario", usuario);
 		request.getRequestDispatcher("obterdados.jsp").forward(request, response);
 		
 	}
@@ -32,19 +32,19 @@ public class ObterDados extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		Integer id = Integer.parseInt(request.getParameter("txtid"));
-		String filme = request.getParameter("txtfilme");
-		String genero = request.getParameter("txtgenero");
-		String classificacao = request.getParameter("txtclassificacao");
+		Integer codigo = Integer.parseInt(request.getParameter("txtcodigo"));
+		String nome = request.getParameter("txtnome");
+		String login = request.getParameter("txtlogin");
+		String senha = request.getParameter("txtsenha");
 		
-		Filme film = new Filme();
-		film.setId(id);
-		film.setFilme(filme);
-		film.setGenero(genero);
-		film.setClassificacao(classificacao);
+		Usuario usuario = new Usuario();
+		usuario.setCodigo(codigo);
+		usuario.setNome(nome);
+		usuario.setLogin(login);
+		usuario.setSenha(senha);
 		
-		FilmeDao filmeDao = new FilmeDao();
-		filmeDao.alterar(film);
+		UsuarioDao usuarioDao = new UsuarioDao();
+		usuarioDao.alterar(usuario);
 		
 		response.sendRedirect("http://localhost:8080/EmpresaABC/buscartodos.do");		
 	}
